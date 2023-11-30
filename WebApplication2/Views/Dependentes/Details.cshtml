@@ -1,0 +1,50 @@
+﻿@model WebApplication2.Models.Dependente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Dependente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereço)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereço)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_nasc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_nasc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_dependente }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

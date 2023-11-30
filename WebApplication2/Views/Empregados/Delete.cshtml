@@ -1,0 +1,64 @@
+﻿@model WebApplication2.Models.Empregado
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Deletar</h2>
+
+<h3>Deletar cadastro?</h3>
+<div>
+    <h4>Empregado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.matrícula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matrícula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereço)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereço)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dependente.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dependente.nome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

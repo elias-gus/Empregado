@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_230579Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="db_230579ModelStoreContainer">
+    <EntitySet Name="Dependente" EntityType="db_230579Model.Store.Dependente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Empregado" EntityType="db_230579Model.Store.Empregado" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DependenteEmpregado" Association="db_230579Model.Store.DependenteEmpregado">
+      <End Role="Dependente" EntitySet="Dependente" />
+      <End Role="Empregado" EntitySet="Empregado" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Dependente">
+    <Key>
+      <PropertyRef Name="id_dependente" />
+    </Key>
+    <Property Name="id_dependente" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="cpf" Type="int" Nullable="true" />
+    <Property Name="endereço" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="data_nasc" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Empregado">
+    <Key>
+      <PropertyRef Name="id_empregado" />
+    </Key>
+    <Property Name="id_empregado" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="matrícula" Type="int" Nullable="true" />
+    <Property Name="cpf" Type="int" Nullable="true" />
+    <Property Name="endereço" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="id_dependente" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="DependenteEmpregado">
+    <End Role="Dependente" Type="db_230579Model.Store.Dependente" Multiplicity="1" />
+    <End Role="Empregado" Type="db_230579Model.Store.Empregado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dependente">
+        <PropertyRef Name="id_dependente" />
+      </Principal>
+      <Dependent Role="Empregado">
+        <PropertyRef Name="id_dependente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_230579Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dependente">
+          <Key>
+            <PropertyRef Name="id_dependente" />
+          </Key>
+          <Property Name="id_dependente" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="Int32" />
+          <Property Name="endereço" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="data_nasc" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Empregado" Relationship="db_230579Model.DependenteEmpregado" FromRole="Dependente" ToRole="Empregado" />
+        </EntityType>
+        <EntityType Name="Empregado">
+          <Key>
+            <PropertyRef Name="id_empregado" />
+          </Key>
+          <Property Name="id_empregado" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="matrícula" Type="Int32" />
+          <Property Name="cpf" Type="Int32" />
+          <Property Name="endereço" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dependente" Relationship="db_230579Model.DependenteEmpregado" FromRole="Empregado" ToRole="Dependente" />
+          <Property Name="id_dependente" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_230579Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dependente" EntityType="Self.Dependente" />
+          <EntitySet Name="Empregado" EntityType="Self.Empregado" />
+          <AssociationSet Name="DependenteEmpregado" Association="db_230579Model.DependenteEmpregado">
+            <End Role="Dependente" EntitySet="Dependente" />
+            <End Role="Empregado" EntitySet="Empregado" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="DependenteEmpregado">
+          <End Type="db_230579Model.Dependente" Role="Dependente" Multiplicity="1" />
+          <End Type="db_230579Model.Empregado" Role="Empregado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dependente">
+              <PropertyRef Name="id_dependente" />
+            </Principal>
+            <Dependent Role="Empregado">
+              <PropertyRef Name="id_dependente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_230579ModelStoreContainer" CdmEntityContainer="db_230579Entities">
+    <EntitySetMapping Name="Dependente">
+      <EntityTypeMapping TypeName="IsTypeOf(db_230579Model.Dependente)">
+        <MappingFragment StoreEntitySet="Dependente">
+          <ScalarProperty Name="id_dependente" ColumnName="id_dependente" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="endereço" ColumnName="endereço" />
+          <ScalarProperty Name="data_nasc" ColumnName="data_nasc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empregado">
+      <EntityTypeMapping TypeName="IsTypeOf(db_230579Model.Empregado)">
+        <MappingFragment StoreEntitySet="Empregado">
+          <ScalarProperty Name="id_empregado" ColumnName="id_empregado" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="matrícula" ColumnName="matrícula" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="endereço" ColumnName="endereço" />
+          <ScalarProperty Name="id_dependente" ColumnName="id_dependente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
